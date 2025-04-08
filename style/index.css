@@ -1,0 +1,16 @@
+  
+  body {
+    background-image: url('../assets/Main_background_3.jpg'); /* תמונה ראשונה */
+    background-size: cover;   /* התמונה תכסה את הרקע */
+    background-position: top center;   /* התמונה מתחילה בחלק העליון */
+    background-attachment:fixed;   /* התמונה תתגלגל עם הדף */
+    background-repeat: no-repeat;   /* ללא חזרה */
+    height: 100%;   /* לוודא שהרקע מכסה את כל גובה הדף */
+    background-color: #A0A0A0; /* או כל צבע אחר שתרצה */
+  }
+  
+  
+  .content {
+    min-height: 100vh;   /* הגובה המינימלי של התוכן הוא גובה המסך */
+    padding: 20px;
+  }

@@ -1,0 +1,100 @@
+/* CSS עבור האנימציה */
+.project-image {
+    width: auto; /* התמונות יתפסו את כל רוחב האלמנט */
+    height: 300px; /* שמירה על פרופורציות של התמונה */
+    max-width: 400px; /* הגבלת גודל מקסימלי לכל תמונה */
+    object-fit: cover; /* מאפשרת תמונות למלא את המקום מבלי לעוות את הצורה */
+    border-radius: 8px; /* עיגול קצוות */
+    margin: 20px auto;
+    display: block;
+    transition: opacity 0.5s ease;
+  }
+  .fade-enter {
+    opacity: 0;
+    
+  }
+  .fade-enter-active {
+    opacity: 1;
+  }
+  .fade-exit {
+    opacity: 1;
+    
+  }
+  .fade-exit-active {
+    opacity: 0; 
+  }
+  
+  .main-container-setup {
+    display: flex;
+    justify-content: center; /* ממקם את התוכן אופקית במרכז */
+    align-items: center; /* ממקם את התוכן אנכית במרכז */
+  }
+  
+  /* מרכזת את כל התוכן */
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    text-align: center;
+  }
+  
+  /* עיצוב עבור נקודות ניווט */
+ 
+  .image-gallery {
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* סדר את הנקודות מלמעלה למטה */
+    align-items: center;
+    margin-top: 10px; /* רווח בין התמונה לנקודות */
+  }
+  
+  .dot {
+    width: 15px;
+    height: 15px;
+    margin: 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .dot.active {
+    background-color: #717171;
+  }
+  
+  .component {
+    min-height: 100px;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+
+  /* כפתור עריכה */
+.edit-button {
+  position: absolute;
+  bottom: 10px;
+  background-color: transparent !important; /* רקע שקוף */
+  border: none !important; /* ביטול גבול */
+  padding: 0 !important; /* ביטול רווח פנימי */
+  color: gray !important; /* טקסט אפור */
+  
+}
+
+.edit-button-right {
+  right: 10px;
+}
+
+.edit-button-left {
+  left: 10px;
+}
+
+/* מניעת שינויים במצב ריחוף */
+.edit-button:hover {
+  background-color: transparent !important; /* ביטול שינוי רקע */
+  color: gray !important; /* שמירת צבע הטקסט */
+}
+
+.transparent-background {
+  background-color: transparent
+}

@@ -1,0 +1,24 @@
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .center-content > * {
+    margin: 10px; /* מרווח בין כל פריט */
+  }
+  
+  .side-buttons {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 9998;
+  }
+
+  .toolbar-with-background {
+    /*background-image: url('../assets/Toolbar_background_5.jpg');*/
+    background-color: #343a4048;
+    background-size: cover;
+    background-position: center;
+  }
+  

@@ -1,0 +1,57 @@
+.project-details {  
+    position: 'fixed';
+    top: 0;
+    left: 0;
+    width: '100%';
+    height: '100%';
+    display: 'flex';
+}
+
+.text-background {
+  background-color: transparent;      /* רקע */
+  border-radius: 10px;          /* פינות מעוגלות */
+  padding: 20px;                /* רווח פנימי (כדי שהתוכן לא יהיה צמוד לדפנות) */
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  צל עדין (לפי הצורך) */
+  margin: 20px;
+}
+
+
+.large-image {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+  }
+  
+  .fade-exit {
+    opacity: 1;
+  }
+  
+  .fade-exit-active {
+    opacity: 0;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .equal-button {
+    width: 140px;
+    height: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px; 
+    border-radius: 5px; 
+  }
+  

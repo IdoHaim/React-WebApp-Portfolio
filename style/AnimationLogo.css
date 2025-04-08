@@ -1,0 +1,14 @@
+body {
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+svg path {
+    stroke: black;
+    stroke-width: 10px;
+    fill: none;
+}
