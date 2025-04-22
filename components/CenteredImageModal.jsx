@@ -7,11 +7,11 @@ function CenteredImageModal({ imageUrl, onClose }) {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
-  // מנע גלילה של הדף כאשר המודל פתוח
+  // prevent scrolling in the main page
   useEffect(() => {
-   document.body.style.overflow = "hidden"; // נעילת גלילה
+   document.body.style.overflow = "hidden"; // lock scrolling
    return () => {
-     document.body.style.overflow = "auto"; // שחרור נעילת גלילה
+     document.body.style.overflow = "auto"; // unlock scrolling
    };
  }, []);
 
@@ -20,16 +20,17 @@ function CenteredImageModal({ imageUrl, onClose }) {
 
   const handleWheel = (e) => {
     e.preventDefault();
-    const zoomStep = 0.1; // גודל השינוי לכל תזוזה בגלגלת
+    const zoomStep = 0.1; // zoom in and out with the scroller
     if (e.deltaY < 0) {
-      // גלילה למעלה
+      // scroll up
       setScale((prevScale) => prevScale + zoomStep);
     } else {
-      // גלילה למטה
+      // scroll down
       setScale((prevScale) => (prevScale > zoomStep ? prevScale - zoomStep : prevScale));
     }
   };
 
+  // dragging the picture
   const handleMouseDown = (e) => {
     setIsDragging(true);
     setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
@@ -63,7 +64,7 @@ function CenteredImageModal({ imageUrl, onClose }) {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
-            onWheel={handleWheel} // מאזין לאירוע גלילה
+            onWheel={handleWheel} 
           >
             <img
               src={imageUrl}
