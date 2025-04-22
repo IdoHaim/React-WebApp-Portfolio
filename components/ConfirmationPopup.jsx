@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap'; // אפשר להשתמש ב-React Bootstrap אם זה מתאים לך
+import { Button, Modal } from 'react-bootstrap'; 
 
 /**
  * @param {function onAnswer(bool,object) {}}
@@ -11,9 +11,9 @@ import { Button, Modal } from 'react-bootstrap'; // אפשר להשתמש ב-Rea
  * @param {object} obj - to pass any information from the caller
  */
 function ConfirmationPopup({onAnswer,popupText,obj}) {
-  const [show, setShow] = useState(true); // מצב לפתיחה או סגירה של ה-Popup
+  const [show, setShow] = useState(true); 
 
-  // פונקציה לסגירת החלון
+
   const handleClose = (answer) => {
     setShow(false);   
     onAnswer(answer,obj);
