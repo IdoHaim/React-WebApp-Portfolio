@@ -42,7 +42,7 @@
   right: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* מרווח בין הכפתורים */
+  gap: 10px;
   justify-content: flex-start;
   align-items: flex-end;
   z-index: 9999;
@@ -51,7 +51,7 @@
 .controls button {
   border: none;
   border-radius: 50%;
-  width: 40px; /* התאמה לגודל אחיד */
+  width: 40px;
   height: 40px;
   font-size: 20px;
   display: flex;
@@ -63,5 +63,5 @@
 }
 
 .controls button.close {
-  background-color: rgba(0, 0, 0, 0.8); /* רקע אדום */
+  background-color: rgba(0, 0, 0, 0.8); 
 }
