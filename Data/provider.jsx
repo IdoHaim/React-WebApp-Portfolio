@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { initialProjects } from "./initialProjects"; 
 import { jwtDecode } from 'jwt-decode';
 import imageCompression from 'browser-image-compression';
 import axios from "axios";
@@ -9,10 +8,10 @@ import axios from "axios";
 // api adress
 const apiAdress = "https://localhost:7199/api/Item";
 
-// יצירת ה-Context
-const ProjectsContext = createContext();  // השם צריך להיות ProjectsContext
 
-// קומפוננטה לספק את המידע לכל האפליקציה
+const ProjectsContext = createContext(); 
+
+
 export function ProjectsProvider({ children }) {
   const [projects, setProjects] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,8 +37,7 @@ const fetchData = async (retryCount = 0) => {
     if (retryCount < MAX_RETRIES) {
       setTimeout(() => fetchData(retryCount + 1), RETRY_DELAY);
     } else {
-      console.log("Max retries reached, loading initial data...");
-      setProjects(initialProjects);
+      console.log("Max retries reached...");
       setIsConnected(false);
     }
   }
@@ -84,16 +82,14 @@ useEffect(() => {
   const convertProjectToFormData = async (project) => {
     const formData = new FormData();
     console.log("Id before:", project.id);
-    // מוסיף את כל השדות לפרויקט באופן דינמי
+    // add all of the fields dynamicly to each project
     Object.keys(project).forEach((key) => {
         if (key !== "images") {
             formData.append(key, project[key]);
         }
     });
 
-    // טיפול בתמונות
-    // חשוב!!!!:
-    // להוסיף אופציה לכיווץ תמונה
+    // handle images
     const imagePromises = project.images.map(async (image, index) => {
       if (image.startsWith("blob:")) {
           const res = await fetch(image);
@@ -106,13 +102,13 @@ useEffect(() => {
           });
 
           formData.append("Images", compressedBlob, `image_${index}.jpg`);
-          formData.append(`ImageUrls[${index}]`, "[EMPTY]"); // תא ריק לקישור שיווצר בשרת
+          formData.append(`ImageUrls[${index}]`, "[EMPTY]"); // create an empty chamber for the url to be injected later
       } else {
-          formData.append(`ImageUrls[${index}]`, image); // קישור קיים
+          formData.append(`ImageUrls[${index}]`, image); // existing url
       }
   });
 
-    // מחכים שכל התמונות יתאפסו עליהם
+    // waiting for all the of images to be ready
     await Promise.all(imagePromises);
     
     return formData;
@@ -131,8 +127,7 @@ useEffect(() => {
       try {
         const response = await axios.post(`${apiAdress}`, updatedProject, {
           headers: {
-            Authorization: `Bearer ${token}`, // מוסיפים את ה-Token ל-Headers
-            //"Content-Type": "application/json", // סוג התוכן הוא JSON (לא מתאים כשאני צריך לשלוח בתור formdata)
+            Authorization: `Bearer ${token}`, // adding the token to the headers
           },
         });
         console.log("p: "+updatedProject + " | "+ JSON.stringify(updatedProject, null, 2));
@@ -153,7 +148,7 @@ useEffect(() => {
       try {
         const response = await axios.put(`${apiAdress}`, updatedProject, {
           headers: {
-            Authorization: `Bearer ${token}`, // מוסיפים את ה-Token ל-Headers
+            Authorization: `Bearer ${token}`, // adding the token to the headers
           },
         });
     
@@ -168,12 +163,12 @@ useEffect(() => {
 
 
   const deleteProject = async (itemId) => {
-    const token = localStorage.getItem("jwtToken"); // קבלת ה-Token מה-Local Storage
+    const token = localStorage.getItem("jwtToken");
   
     try {
       const response = await axios.delete(`${apiAdress}/${itemId}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // מוסיפים את ה-Token ל-Headers
+          Authorization: `Bearer ${token}`, // adding the token to the headers
         },
       });
   
@@ -194,8 +189,8 @@ useEffect(() => {
         passwordHash: user.password,
       });
 
-      const token = response.data; // ה-JWT Token מהשרת
-      localStorage.setItem("jwtToken", token); // שומרים את ה-Token ב-Local Storage
+      const token = response.data; // JWT Token from the server
+      localStorage.setItem("jwtToken", token); // saving the Token in Local Storage
       setIsLoggedIn(true);
       alert("Login successful!");
     } catch (error) {
@@ -213,7 +208,7 @@ useEffect(() => {
   );
 }
 
-// הוק לשימוש ב-Context
+
 export function useProjects() {
-  return useContext(ProjectsContext);  // צריך להתאים ל-ProjectsContext
+  return useContext(ProjectsContext);
 }
