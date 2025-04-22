@@ -12,23 +12,23 @@ import "../style/Home.css";
 
 function Home() {
   const { projects,isConnected, isLoggedIn, deleteProject } = useProjects(); 
-  const [isLoading, setIsLoading] = useState(true); // מצב לטעינה
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState(null);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showNewProjectForm, setShowNewProjectForm] = useState(false);
   const [projectForEdit,setProjectForEdit] = useState(null);
-  const [currentMainCategoryIndex, setCurrentMainCategoryIndex] = useState(0);//
+  const [currentMainCategoryIndex, setCurrentMainCategoryIndex] = useState(0);
   const [currentSecondaryCategoryIndex, setCurrentSecondaryCategoryIndex] = useState(-1);
   const [showPopup,setShowPopup] = useState(false);
 
   useEffect(() => {
     if (isConnected) {
-      setIsLoading(false); // הטעינה הושלמה כשהפרויקטים נטענו
+      setIsLoading(false); 
     }
   }, [projects]);
 
   if (isLoading) {
-    // מסך טעינה בזמן שמחכים לנתונים
+    // loading screen (the animation)
     return <div>
       <AnimationLogo></AnimationLogo>
 
@@ -48,11 +48,11 @@ function Home() {
     </div>;
   }
   
-  // פונקציה לסינון פרוייקטים לפי קטגוריה
+  // filter projects by category
   const handleCategoryChange = (category) => {
     setCurrentSecondaryCategoryIndex(category);
   };
-  // סוגר את הפרטי פרוייקט בשמשנים קטגוריה
+  // close project details when category has been changed
   const handleSetCurrentMainCategoryIndex = (index) => {
     closeProjectDetails();
     setCurrentMainCategoryIndex(index);
@@ -64,12 +64,12 @@ function Home() {
     setShowNewProjectForm(answer);
     setProjectForEdit(null);
   }
-  // סגירת פרטי הפרוייקט
+  
   const closeProjectDetails = () => {
     setSelectedProject(null);
   };
   const handleEditProject = (e,project) => {
-    e.stopPropagation(); // מונע מהכרטיס כולו להיבחר
+    e.stopPropagation(); // stops ProjectDetails from being activated when editing a project
     setProjectForEdit(project);
     handleOpenProjectForm();
 
@@ -84,7 +84,7 @@ function Home() {
     }
     setShowPopup(false);
   };
-
+  
   const trimProjectDescription = (project) => {
     if(project.description && project.description.length > 114){
       return project.description.slice(0, 110) + '...';
@@ -120,7 +120,7 @@ function Home() {
      <Container className="main-container-setup">
       <div>
       
-      {/* Dropdown לסינון פרוייקטים לפי קטגוריה */}
+      {/* Dropdown to filter by category*/}
       <Dropdown className="mb-4">
   <Dropdown.Toggle variant="secondary" id="dropdown-basic">
     {currentSecondaryCategoryIndex !== -1 ? secondaryCategories[currentSecondaryCategoryIndex] : "Filter by Category"}
@@ -132,7 +132,7 @@ function Home() {
     {secondaryCategories.map((category, idx) => (
       <Dropdown.Item 
         onClick={() => handleCategoryChange(idx)} 
-        key={idx} // אפשר להשתמש ב-id או index בתור key
+        key={idx} 
       >
         {category}
       </Dropdown.Item>
@@ -141,7 +141,7 @@ function Home() {
 </Dropdown>
 
 
-      {/* הצגת כל כרטיסי הפרוייקטים */}
+      {/* Shows all of the project's cards */}
       <div className="d-flex flex-wrap justify-content-center">
         {filteredProjects.map((project) => (
         <>
@@ -153,8 +153,8 @@ function Home() {
             >
             <Card.Img /*variant="top"*/ src={project.images[0]} alt="Project Thumbnail"    
             style={{
-            height: "200px", // הגדרת גובה קבוע
-            objectFit: "cover", // מתאם את התמונה לגודל הקונטיינר מבלי לשנות את הפרופורציות
+            height: "200px", 
+            objectFit: "cover", // adjusting the image the the cantainer's size without changing the image's proportion
           }} />
             <Card.Body>
               <Card.Title>{project.title}</Card.Title>
@@ -186,15 +186,15 @@ function Home() {
         </>))}
       </div>
 
-      {/* הצגת פרטי פרוייקט נבחר */}
+      {/* Show selected project details */}
       {selectedProject && (
         <ProjectDetails project={selectedProject} onClose={closeProjectDetails}></ProjectDetails>
       )}
 
-      {/* עבור הוספת פרוייקט חדש */}
+      {/* For adding a new project */}
       <NewProjectForm showModal={showNewProjectForm} setShowModal={handleCloseProjectForm} projectForEdit={projectForEdit}/>
       
-      {/* עבור התחברות */}
+      {/* Login */}
       <LoginForm showModal={showLoginForm} setShowModal={setShowLoginForm}></LoginForm>
       </div>
       </Container>
