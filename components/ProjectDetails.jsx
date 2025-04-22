@@ -27,11 +27,11 @@ function ProjectDetails({ project, onClose }) {
   };
 
   const handleImageChange = (index) => {
-    setAnimationIn(false); // עצור את האנימציה הנוכחית
+    setAnimationIn(false); // stops the current animation
     setTimeout(() => {
-      setCurrentImageIndex(index); // החלף את התמונה אחרי חצי שניה
-      setAnimationIn(true); // הפעל את האנימציה מחדש
-    }, 300); // חכה 500 מילי-שניות לפני שינוי התמונה
+      setCurrentImageIndex(index); // switch image 
+      setAnimationIn(true); // restart animation
+    }, 300); // await 300 milliseconds
   };
 
 
@@ -44,7 +44,7 @@ function ProjectDetails({ project, onClose }) {
             <small>Category: {project.secondaryCategory}</small>
           </div>
 
-          {/* הגלריה של התמונות */}
+          {/* Image gallery */}
           <div className="image-gallery">
             <CSSTransition
               in={animationIn}
@@ -61,7 +61,7 @@ function ProjectDetails({ project, onClose }) {
               />
             </CSSTransition>
 
-            {/* נקודות ניווט לתמונות */}
+            {/* Image navigation point */}
             <div className="d-flex justify-content-center">
               {project.images.map((_, index) => (
                 <span
@@ -82,7 +82,7 @@ function ProjectDetails({ project, onClose }) {
             </Button>
           </div>
 
-      {/* תצוגה מלאה של התמונה */}
+      {/* Full image display */}
       { showModal && (
         <CenteredImageModal
         imageUrl= {project.images[currentImageIndex]}
