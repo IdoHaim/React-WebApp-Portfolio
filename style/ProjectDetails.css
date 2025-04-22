@@ -8,10 +8,10 @@
 }
 
 .text-background {
-  background-color: transparent;      /* רקע */
-  border-radius: 10px;          /* פינות מעוגלות */
-  padding: 20px;                /* רווח פנימי (כדי שהתוכן לא יהיה צמוד לדפנות) */
-  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  צל עדין (לפי הצורך) */
+  background-color: transparent;    
+  border-radius: 10px;         
+  padding: 20px;              
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
   margin: 20px;
 }
 
