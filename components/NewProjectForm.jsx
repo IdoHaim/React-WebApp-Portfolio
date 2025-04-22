@@ -34,8 +34,8 @@ function NewProjectForm({ showModal, setShowModal, projectForEdit }) {
   const handleDeleteImage = (index , event) => {
     event.preventDefault();
     const updatedImages = [...newProject.images];
-    updatedImages.splice(index, 1); // מסירה את התמונה לפי אינדקס
-    setNewProject({ ...newProject, images: updatedImages }); // עדכון ה-state
+    updatedImages.splice(index, 1); 
+    setNewProject({ ...newProject, images: updatedImages }); 
   };
 
   const handleImageUpload = (files) => {
