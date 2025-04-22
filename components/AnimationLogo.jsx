@@ -6,7 +6,7 @@ import "../style/AnimationLogo.css";
 
 const AnimationLogo = () => {
     const [currentLogo, setCurrentLogo] = useState(0);
-    const [isAnimating, setIsAnimating] = useState(false); // סטייט לשליטה באנימציה
+    const [isAnimating, setIsAnimating] = useState(false); // state to control the animation
     const logos = [<Logo1 />, <Logo2 />, <Logo3 />, <Logo4 />];
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const AnimationLogo = () => {
             });
 
             setTimeout(() => {
-                setIsAnimating(true); // מציג את ה-SVG רק כשהוא מוכן לאנימציה
+                setIsAnimating(true); 
                 allpath.forEach((path) => {
                     path.style.transition = "stroke-dashoffset 3s ease-in-out";
                     path.style.strokeDashoffset = "0";
@@ -28,14 +28,14 @@ const AnimationLogo = () => {
             }, 100);
         };
 
-        animate(); // הפעלה ראשונית
+        animate(); // start animate
 
         const interval = setInterval(() => {
-            setIsAnimating(false); // מסתיר את הלוגו הקודם
+            setIsAnimating(false); //hide the previous logo
             setTimeout(() => {
-                setCurrentLogo((prev) => (prev + 1) % logos.length); // מחליף לוגו
-                setTimeout(animate, 100); // מפעיל את האנימציה אחרי החלפת הלוגו
-            }, 400); // מחכה קצת לפני החלפת הלוגו
+                setCurrentLogo((prev) => (prev + 1) % logos.length); // change logo
+                setTimeout(animate, 100); // initialize the animation after the logos has been switched
+            }, 400); // waite after the logo has been switched
         }, 4000);
 
         return () => clearInterval(interval);
